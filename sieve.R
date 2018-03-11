@@ -5,7 +5,7 @@
 #
 
 
-sieve <- function(MAXN=10000){
+sieveLoop <- function(MAXN=10000){
 
   numbers <- rep(0,MAXN) ; nseq <- seq(1:MAXN) ;
   maxSmallFactor <- round(sqrt(MAXN)) ;
@@ -30,10 +30,43 @@ sieve <- function(MAXN=10000){
 
 
 
+sieveVector <- function(MAXN=10000){
+
+    numbers <- 3:MAXN
+    maxSmallFactor <- round(sqrt(MAXN)) ;
+
+    currPrime <- 2 ; primes <- c(2) 
+    while(currPrime <= maxSmallFactor) {
+
+        numbers <- numbers[numbers %% currPrime!=0]
+        currPrime <- numbers[1] ;  
+        primes <- c(primes,currPrime)
+        
+    }
+    
+    primes <- c(primes,numbers)
+    
+    primes
+    
+}
 
 
 
+sieve <-  function(MAXN){
+    sieveVector(MAXN)
+}
 
+#
+#
+#
+#
+
+testSieve <- function(MAXN) {
+
+    print(system.time(p1 <- sieveLoop(MAXN)))
+    print(system.time(p1 <- sieveVector(MAXN)))
+
+}
 
 
 
